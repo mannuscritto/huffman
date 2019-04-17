@@ -15,4 +15,5 @@ int inserir_esquerda (ARVORE*, ARVORE);
 int inserir_direita  (ARVORE*, ARVORE);
 ARVORE* aloca_noh_arvore(char*, unsigned); // simbolo, frequencia
 // percurso
+
 #endif
