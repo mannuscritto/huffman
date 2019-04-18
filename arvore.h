@@ -13,7 +13,7 @@ typedef struct no_arvore* ARVORE;
 int criar_arvore (ARVORE*);
 int inserir_esquerda (ARVORE*, ARVORE);
 int inserir_direita  (ARVORE*, ARVORE);
-ARVORE* aloca_noh_arvore(char*, unsigned); // simbolo, frequencia
+ARVORE aloca_noh_arvore(char*, unsigned); // simbolo, frequencia
 // percurso
 
 #endif

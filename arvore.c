@@ -12,31 +12,34 @@ int criar_arvore (ARVORE *t) {
 }
 
 int inserir_esquerda (ARVORE *t, ARVORE filho) {
-	if (t->esq != NULL) {
+	ARVORE temp = *t;
+	if (temp->esq != NULL) {
 		return 0;	
 	}
-	t->esq = filho;
+	temp->esq = filho;
 	return 1;
 }
 
 int inserir_direita  (ARVORE *t, ARVORE filho) {
-	if (t->dir != NULL) {
+	ARVORE temp = *t;
+	if (temp->dir != NULL) {
 		return 0;	
 	}	
-	t->dir = filho;
+	temp->dir = filho;
 	return 1;
 }
 
-ARVORE* aloca_noh_arvore(char *simb, unsigned freq) {
-	AB t;
-	t = (AB) malloc(sizeof (struct no_arvore));
-	if (t == NULL) {
+ARVORE aloca_noh_arvore(char *simb, unsigned freq) {
+	ARVORE t;
+	t = (ARVORE) malloc(sizeof (struct no_arvore));
+	ARVORE temp = t;
+	if (temp == NULL) {
 		printf("Sem memoria para alocar novo no de arvore\n");
 		exit(1);
 	}
-	strcpy(t->simbolos, simb);
-	t->frequencia = freq;
-	t->esq = NULL;
-	t->dir = NULL;
-	return t;
+	strcpy(temp->simbolos, simb);
+	temp->frequencia = freq;
+	temp->esq = NULL;
+	temp->dir = NULL;
+	return temp;
 }
