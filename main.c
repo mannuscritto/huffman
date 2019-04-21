@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 	printf("Escreva uma string: ");
 	scanf("%s", palavra);
 	
-	char s[32];
+	char s[16];
 	strcpy(s, "");
 	for (i = 0; i < 30; i++) {
 		strcpy(codificado[i], "");	
@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
 	} else {
 		printf("%s contem simbolos que nao existem na tabela\n", palavra);
 	}	
+		
+	if (!imprime_codigos(codigo)) return 0;
 		
 	/* 
 	// ler um padrao de bits para codificado

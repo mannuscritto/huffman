@@ -73,6 +73,29 @@ int decodifica (ARVORE t, char *a, char *b) {
 	
 }
 
-int imprime_codigos (ARVORE t) {
-	
+int imprime_codigos(ARVORE t) {
+	char s[16];
+	strcpy(s, "");
+	printf("Tabela de codigos\n");
+	if (!__imprime_codigos(t, s)) return 0;
+	return 1;
+}
+
+int __imprime_codigos (ARVORE t, char *str) {
+	if (t == NULL) return 0;
+	if (!t->esq && !t->dir) {
+		printf("%s = %s\n", t->simbolos, str);
+		return 1;
+	}
+	int length = strlen(str);
+    char leftcode[10],rightcode[10];
+    strcpy(leftcode,str);
+    strcpy(rightcode,str);
+    leftcode[length] = '0';
+    leftcode[length+1] = '\0';
+    rightcode[length] = '1';
+    rightcode[length+1] = '\0';
+	if (!__imprime_codigos(t->esq, leftcode)) return 0;
+	if (!__imprime_codigos(t->dir, rightcode)) return 0;
+	return 1;
 }

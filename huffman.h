@@ -16,5 +16,5 @@ int constroi_arvore (LISTA, ARVORE*);
 int codifica (ARVORE, char*, char[][16], char *);
 int decodifica (ARVORE, char*, char*);
 int imprime_codigos (ARVORE);
-
+int __imprime_codigos (ARVORE, char*);
 #endif
