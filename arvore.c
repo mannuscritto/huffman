@@ -43,3 +43,32 @@ ARVORE aloca_noh_arvore(char *simb, unsigned freq) {
 	temp->dir = NULL;
 	return temp;
 }
+
+void inordem(ARVORE t) {
+	if (t == NULL) {
+		return;
+	}
+	inordem(t->esq);
+	printf(" %s, %d |", t->simbolos, t->frequencia);
+	inordem(t->dir);
+	return;
+}
+
+void largura (ARVORE t)
+{
+     ARVORE fila[20];
+     int ini, fin;
+     ARVORE temp;
+     
+     ini = 0;fin = -1;
+     fila[++fin] = t;
+     
+     while (ini <= fin)
+     {
+        temp = fila[ini++];
+        printf(" %s, %d |", temp->simbolos, temp->frequencia);
+        if (temp->esq != NULL) fila[++fin] = temp->esq;
+        if (temp->dir != NULL) fila[++fin] = temp->dir;
+     }
+     return;  
+}

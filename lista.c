@@ -24,15 +24,15 @@ int inserir_ordenado (LISTA *l, ARVORE t) {
 		LISTA p, q;
 		p = *l;
 		q = NULL;
-		while ((p->info->frequencia > t->frequencia) && (p->prox != NULL)) {
+		while ((p != NULL) && (t->frequencia >= p->info->frequencia)) {
 			q = p;
 			p = p->prox;
 		}
 		if (q == NULL) {
 			return 0;
 		}
-		p->prox = novo;
-		novo->prox = q;
+		q->prox = novo;
+		novo->prox = p;
 	}
 	return 1;
 }
@@ -59,4 +59,17 @@ int tamanho_da_lista (LISTA l) {
         cont++;    
     }
     return cont;
+}
+
+void mostrar_lista(LISTA l) {
+	LISTA temp = l;
+	if (temp == NULL) {
+		printf("Nao eh possivel mostrar lista vazia!\n");
+		return;
+	}
+	printf("Comeco de lista\n");
+	for (temp = l; temp != NULL; temp = temp->prox) {
+		printf("\nSimbolo: %s | Frequencia: %d\n", temp->info->simbolos, temp->info->frequencia);
+	}
+	printf("Fim de lista\n");
 }

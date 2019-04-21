@@ -14,4 +14,5 @@ int criar_lista (LISTA*);
 int inserir_ordenado (LISTA*, ARVORE);
 int remove_primeiro_lista (LISTA*, ARVORE*);
 int tamanho_da_lista (LISTA);
+void mostrar_lista(LISTA);
 #endif

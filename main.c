@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "huffman.h"
 #include "arvore.h"
 #include "lista.h"
@@ -11,34 +12,58 @@
 5. Digitar uma palavra e imprimir o codigo para cada simbolo
 6. Digitar um padrao de bits, e apresentar a palavra correspondente
 */
-
+	
 int main(int argc, char *argv[])
 {
-  ARVORE codigo;
-  unsigned tabela[256];
-  LISTA lista_inicial;
-  char palavra[30], codificado[1024];
-  
-  // inicializar as estruturas
-  
-  // Ler o arquivo linha, por linha
-  //   Para cada caracter da linha, incrementar a frequencia dele na tabela
-  
-  constroi_lista (tabela, &lista_inicial);
-  constroi_arvore (lista_inicial, &codigo);
-  
-  // ler a palavra para palavra[30]
-  if (codifica (codigo, palavra, codificado))
-     printf("%s ->%s\n", palavra, codificado);
-  else
-     printf("%s contem simbolos que nao existem na tabela\n", palavra);
-     
-  // ler um padrao de bits para codificado
-  if (decodifica(codigo, codificado, palavra))
-     printf("%s ->%s\n", codificado, palavra);
-  else
-     printf("Esse padrao nao pode ser decodificado com essa arvore\n");
-  
-  system("PAUSE");	
-  return 0;
+	ARVORE codigo;
+	unsigned tabela[256] = {0};
+	LISTA lista_inicial;
+	char palavra[1024], codificado[1024];
+	
+	// inicializar as estruturas
+	if (!criar_arvore(&codigo)) {
+		printf("Erro ao criar a arvore");
+		exit(1);
+	}
+	codigo = (ARVORE)malloc(sizeof(struct no_arvore));
+	if (!criar_lista(&lista_inicial)) {
+		printf("Erro ao inicializar a lista");
+		exit(1);
+	}
+	// Ler o arquivo linha, por linha
+	//   Para cada caracter da linha, incrementar a frequencia dele na tabela
+	char arquivo[256];
+	
+	printf("Escreva uma string: ");
+	scanf("%s", arquivo);
+	int i;
+	for (i = 0; i < strlen(arquivo); i++) {
+		tabela[arquivo[i]]++;
+	}
+	
+	if(!constroi_lista (tabela, &lista_inicial)) return 0;
+	if(!constroi_arvore(lista_inicial, &codigo)) return 0;
+	
+	// ler a palavra para palavra[30]
+	
+	printf("Escreva uma string: ");
+	scanf("%s", palavra);
+	
+	char s[10];
+	strcpy(s, "");
+	strcpy(codificado, "");
+	/*if (codifica (codigo, palavra, codificado, s))
+		printf("%s -> %s\n", palavra, codificado);
+	else
+		printf("%s contem simbolos que nao existem na tabela\n", palavra);
+	*/
+	/* 
+	// ler um padrao de bits para codificado
+	if (decodifica(codigo, codificado, palavra))
+		printf("%s ->%s\n", codificado, palavra);
+	else
+		printf("Esse padrao nao pode ser decodificado com essa arvore\n");
+	*/
+	system("PAUSE");	
+	return 0;
 }
