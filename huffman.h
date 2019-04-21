@@ -13,7 +13,7 @@
 
 int constroi_lista (unsigned*, LISTA*);
 int constroi_arvore (LISTA, ARVORE*);
-int codifica (ARVORE, char*, char*, char *);
+int codifica (ARVORE, char*, char[][16], char *);
 int decodifica (ARVORE, char*, char*);
 int imprime_codigos (ARVORE);
 

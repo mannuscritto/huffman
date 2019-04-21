@@ -11,14 +11,14 @@
 4. Qual a taxa de compressao para o arquivo informado
 5. Digitar uma palavra e imprimir o codigo para cada simbolo
 6. Digitar um padrao de bits, e apresentar a palavra correspondente
-*/
+*/	
 	
 int main(int argc, char *argv[])
 {
 	ARVORE codigo;
 	unsigned tabela[256] = {0};
 	LISTA lista_inicial;
-	char palavra[1024], codificado[1024];
+	char palavra[30], codificado[30][16];
 	
 	// inicializar as estruturas
 	if (!criar_arvore(&codigo)) {
@@ -43,20 +43,29 @@ int main(int argc, char *argv[])
 	
 	if(!constroi_lista (tabela, &lista_inicial)) return 0;
 	if(!constroi_arvore(lista_inicial, &codigo)) return 0;
-	
 	// ler a palavra para palavra[30]
 	
 	printf("Escreva uma string: ");
 	scanf("%s", palavra);
 	
-	char s[10];
+	char s[32];
 	strcpy(s, "");
-	strcpy(codificado, "");
-	/*if (codifica (codigo, palavra, codificado, s))
-		printf("%s -> %s\n", palavra, codificado);
-	else
+	for (i = 0; i < 30; i++) {
+		strcpy(codificado[i], "");	
+	}
+
+	if (codifica (codigo, palavra, codificado, s)) {
+		printf("%s -> ", palavra);
+		for (i = 0; i < 30; i++) {
+			if (strcmp(codificado[i], "") != 0) {
+				printf("%s", codificado[i]);		
+			}
+		}
+		printf("\n");
+	} else {
 		printf("%s contem simbolos que nao existem na tabela\n", palavra);
-	*/
+	}	
+		
 	/* 
 	// ler um padrao de bits para codificado
 	if (decodifica(codigo, codificado, palavra))

@@ -44,6 +44,16 @@ ARVORE aloca_noh_arvore(char *simb, unsigned freq) {
 	return temp;
 }
 
+void preordem(ARVORE t) {
+	if (t == NULL) {
+		return;
+	}
+	printf(" %s, %d |", t->simbolos, t->frequencia);
+	preordem(t->esq);
+	preordem(t->dir);
+	return;
+}
+
 void inordem(ARVORE t) {
 	if (t == NULL) {
 		return;

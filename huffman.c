@@ -33,7 +33,10 @@ int constroi_arvore (LISTA l, ARVORE *t) {
         if (!remove_primeiro_lista(&l, &s2)) return 0;
         novo->esq = s2;
         novo->dir = s1;
-        strcpy(novo->simbolos, "#");
+        char str_temp[512];
+        strcpy(str_temp, s1->simbolos);
+		strcat(str_temp, s2->simbolos);
+        strcpy(novo->simbolos, str_temp);
         novo->frequencia = s1->frequencia + s2->frequencia;
         if (!inserir_ordenado(&l, novo)) return 0;
     }
@@ -42,14 +45,27 @@ int constroi_arvore (LISTA l, ARVORE *t) {
     return 1;
 }
 
-int codifica (ARVORE t, char *a, char *b, char *str) {
+int codifica (ARVORE t, char *a, char b[][16], char *str) {
+	int i;
 	if (t == NULL) return 0;
-	if (!t->esq && !t->dir)
-		strcat(b, str);
-	if (t->esq)
-		if (!codifica(t->esq, a, b, strcat(str, "0"))) return 0;
-	if (t->dir)
-		if (!codifica(t->dir, a, b, strcat(str, "1"))) return 0;
+	if (!t->esq && !t->dir) {
+		for (i = 0; i < 30; i++) {
+			if (t->simbolos[0] == a[i]) {
+				strcat(b[i], str);
+			}
+		}
+		return 1;
+	}
+	int length = strlen(str);
+    char leftcode[10],rightcode[10];
+    strcpy(leftcode,str);
+    strcpy(rightcode,str);
+    leftcode[length] = '0';
+    leftcode[length+1] = '\0';
+    rightcode[length] = '1';
+    rightcode[length+1] = '\0';
+	if (!codifica(t->esq, a, b, leftcode)) return 0;
+	if (!codifica(t->dir, a, b, rightcode)) return 0;
 	return 1;
 }
 
