@@ -57,20 +57,21 @@ int codifica(ARVORE t, char *a, char *b) {
 	for (i = 0; i < 30; i++) {
 		strcat(b, codificado[i]);
 	}
+	return 1;
 }
 
 int __codifica (ARVORE t, char *a, char b[][16], char *str) {
 	int i;
 	if (t == NULL) return 0;
 	if (!t->esq && !t->dir) {
-		int existe = 0;
+		//int existe = 0;
 		for (i = 0; i < 30; i++) {
 			if (t->simbolos[0] == a[i]) {
 				strcpy(b[i], str);
-				existe = 1;
+				//existe = 1;
 			}
 		}
-		if (!existe) return 0;
+		//if (!existe) return 0;
 		return 1;
 	}
 	int length = strlen(str);
