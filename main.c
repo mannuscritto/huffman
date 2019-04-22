@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	ARVORE codigo;
 	unsigned tabela[256] = {0};
 	LISTA lista_inicial;
-	char palavra[30], codificado[30][16];
+	char palavra[30], codificado[1024];
 	
 	// inicializar as estruturas
 	if (!criar_arvore(&codigo)) {
@@ -47,21 +47,9 @@ int main(int argc, char *argv[])
 	// ler a palavra para palavra[30]
 	printf("Escreva uma string: ");
 	scanf("%s", palavra);
-	
-	char s[16];
-	strcpy(s, "");
-	for (i = 0; i < 30; i++) {
-		strcpy(codificado[i], "");	
-	}
 
-	if (codifica (codigo, palavra, codificado, s)) {
-		printf("%s -> ", palavra);
-		for (i = 0; i < 30; i++) {
-			if (strcmp(codificado[i], "") != 0) {
-				printf("%s", codificado[i]);		
-			}
-		}
-		printf("\n");
+	if (codifica (codigo, palavra, codificado)) {
+		printf("%s -> %s\n", palavra, codificado);
 	} else {
 		printf("%s contem simbolos que nao existem na tabela\n", palavra);
 	}

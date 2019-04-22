@@ -45,15 +45,32 @@ int constroi_arvore (LISTA l, ARVORE *t) {
     return 1;
 }
 
-int codifica (ARVORE t, char *a, char b[][16], char *str) {
+int codifica(ARVORE t, char *a, char *b) {
+	int i;
+	char s[16], codificado[30][16];
+	strcpy(b, "");
+	strcpy(s, "");
+	for (i = 0; i < 30; i++) {
+		strcpy(codificado[i], "");
+	}
+	if (!__codifica(t, a, codificado, s)) return 0;
+	for (i = 0; i < 30; i++) {
+		strcat(b, codificado[i]);
+	}
+}
+
+int __codifica (ARVORE t, char *a, char b[][16], char *str) {
 	int i;
 	if (t == NULL) return 0;
 	if (!t->esq && !t->dir) {
+		int existe = 0;
 		for (i = 0; i < 30; i++) {
 			if (t->simbolos[0] == a[i]) {
-				strcat(b[i], str);
+				strcpy(b[i], str);
+				existe = 1;
 			}
 		}
+		if (!existe) return 0;
 		return 1;
 	}
 	int length = strlen(str);
@@ -64,8 +81,8 @@ int codifica (ARVORE t, char *a, char b[][16], char *str) {
     leftcode[length+1] = '\0';
     rightcode[length] = '1';
     rightcode[length+1] = '\0';
-	if (!codifica(t->esq, a, b, leftcode)) return 0;
-	if (!codifica(t->dir, a, b, rightcode)) return 0;
+	if (!__codifica(t->esq, a, b, leftcode)) return 0;
+	if (!__codifica(t->dir, a, b, rightcode)) return 0;
 	return 1;
 }
 
@@ -76,6 +93,8 @@ int decodifica (ARVORE t, char *a, char *b) {
 		if (!(temp->esq || temp->dir)) {
 			strcat(b, temp->simbolos);
 			temp = t;
+		} else {
+			if (i == strlen(a)) return 0;
 		}
 		if (a[i] == '0') {
 			temp = temp->esq;

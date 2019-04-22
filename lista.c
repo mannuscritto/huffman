@@ -29,6 +29,7 @@ int inserir_ordenado (LISTA *l, ARVORE t) {
 			p = p->prox;
 		}
 		if (q == NULL) {
+			printf("Saiu com falha de inserir_ordenado()\n");
 			return 0;
 		}
 		q->prox = novo;
