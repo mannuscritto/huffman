@@ -54,9 +54,14 @@ int codifica(ARVORE t, char *a, char *b) {
 		strcpy(codificado[i], "");
 	}
 	if (!__codifica(t, a, codificado, s)) return 0;
+	int qtd_char = 0;
 	for (i = 0; i < 30; i++) {
-		strcat(b, codificado[i]);
+		if (strcmp(codificado[i], "") != 0) {
+			strcat(b, codificado[i]);
+			qtd_char++;
+		}
 	}
+	if (qtd_char != strlen(a)) return 0;
 	return 1;
 }
 
@@ -64,14 +69,11 @@ int __codifica (ARVORE t, char *a, char b[][16], char *str) {
 	int i;
 	if (t == NULL) return 0;
 	if (!t->esq && !t->dir) {
-		//int existe = 0;
 		for (i = 0; i < 30; i++) {
 			if (t->simbolos[0] == a[i]) {
 				strcpy(b[i], str);
-				//existe = 1;
 			}
 		}
-		//if (!existe) return 0;
 		return 1;
 	}
 	int length = strlen(str);
