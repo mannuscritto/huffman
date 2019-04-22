@@ -70,7 +70,21 @@ int codifica (ARVORE t, char *a, char b[][16], char *str) {
 }
 
 int decodifica (ARVORE t, char *a, char *b) {
-	
+	ARVORE temp = t;
+	int i = 0;
+	while (i <= strlen(a)) {
+		if (!(temp->esq || temp->dir)) {
+			strcat(b, temp->simbolos);
+			temp = t;
+		}
+		if (a[i] == '0') {
+			temp = temp->esq;
+		} else if (a[i] == '1') {
+			temp = temp->dir;
+		}
+		i++;
+	}
+	return 1;
 }
 
 int imprime_codigos(ARVORE t) {

@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 	
 	if(!constroi_lista (tabela, &lista_inicial)) return 0;
 	if(!constroi_arvore(lista_inicial, &codigo)) return 0;
-	// ler a palavra para palavra[30]
 	
+	// ler a palavra para palavra[30]
 	printf("Escreva uma string: ");
 	scanf("%s", palavra);
 	
@@ -64,17 +64,19 @@ int main(int argc, char *argv[])
 		printf("\n");
 	} else {
 		printf("%s contem simbolos que nao existem na tabela\n", palavra);
-	}	
+	}
 		
 	if (!imprime_codigos(codigo)) return 0;
 		
-	/* 
 	// ler um padrao de bits para codificado
-	if (decodifica(codigo, codificado, palavra))
-		printf("%s ->%s\n", codificado, palavra);
+	char padrao[128];
+	printf("Digite um padrao de bits codificado: ");
+	scanf("%s", padrao);
+	strcpy(palavra, "");
+	if (decodifica(codigo, padrao, palavra))
+		printf("%s -> %s\n", padrao, palavra);
 	else
 		printf("Esse padrao nao pode ser decodificado com essa arvore\n");
-	*/
 	system("PAUSE");	
 	return 0;
 }
