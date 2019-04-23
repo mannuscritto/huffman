@@ -13,6 +13,8 @@
 6. Digitar um padrao de bits, e apresentar a palavra correspondente
 */	
 	
+char *readFile(char *);	
+	
 int main(int argc, char *argv[])
 {
 	ARVORE codigo;
@@ -32,10 +34,12 @@ int main(int argc, char *argv[])
 	}
 	// Ler o arquivo linha, por linha
 	//   Para cada caracter da linha, incrementar a frequencia dele na tabela
-	char arquivo[256];
+	char *arquivo = readFile("dicionario.txt");
+	/*char arquivo[256];
 	
 	printf("Escreva uma string: ");
 	scanf("%s", arquivo);
+	*/
 	int i;
 	for (i = 0; i < strlen(arquivo); i++) {
 		tabela[arquivo[i]]++;
@@ -45,8 +49,8 @@ int main(int argc, char *argv[])
 	if(!constroi_arvore(lista_inicial, &codigo)) return 0;
 	
 	// ler a palavra para palavra[30]
-	printf("Escreva uma string: ");
-	scanf("%s", palavra);
+	printf("Escreva uma palavra: ");
+	scanf("%[^\n]s", palavra);
 
 	if (codifica (codigo, palavra, codificado)) {
 		printf("%s -> %s\n", palavra, codificado);
@@ -60,11 +64,32 @@ int main(int argc, char *argv[])
 	printf("Digite um padrao de bits codificado: ");
 	scanf("%s", codificado);
 	strcpy(palavra, "");
-	
 	if (decodifica(codigo, codificado, palavra))
 		printf("%s -> %s\n", codificado, palavra);
 	else
 		printf("Esse padrao nao pode ser decodificado com essa arvore\n");
-	system("PAUSE");	
+	system("PAUSE");
 	return 0;
+}
+
+char *readFile(char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    char *code;
+    size_t n = 0;
+    int c;
+
+    if (file == NULL)
+        return NULL; //could not open file
+
+    code = malloc(1000);
+
+    while ((c = fgetc(file)) != EOF)
+    {
+        code[n++] = (char) c;
+    }
+
+    // don't forget to terminate with the null character
+    code[n] = '\0';        
+
+    return code;
 }

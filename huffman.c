@@ -61,7 +61,7 @@ int codifica(ARVORE t, char *a, char *b) {
 			qtd_char++;
 		}
 	}
-	if (qtd_char != strlen(a)) return 0;
+	if (qtd_char < strlen(a)) return 0;
 	return 1;
 }
 
@@ -69,7 +69,7 @@ int __codifica (ARVORE t, char *a, char b[][16], char *str) {
 	int i;
 	if (t == NULL) return 0;
 	if (!t->esq && !t->dir) {
-		for (i = 0; i < 30; i++) {
+		for (i = 0; i < strlen(a); i++) {
 			if (t->simbolos[0] == a[i]) {
 				strcpy(b[i], str);
 			}
