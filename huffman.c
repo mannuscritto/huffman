@@ -47,15 +47,15 @@ int constroi_arvore (LISTA l, ARVORE *t) {
 
 int codifica(ARVORE t, char *a, char *b) {
 	int i;
-	char s[16], codificado[30][16];
+	char s[16], codificado[strlen(a)][16];
 	strcpy(b, "");
 	strcpy(s, "");
-	for (i = 0; i < 30; i++) {
+	for (i = 0; i < strlen(a); i++) {
 		strcpy(codificado[i], "");
 	}
 	if (!__codifica(t, a, codificado, s)) return 0;
 	int qtd_char = 0;
-	for (i = 0; i < 30; i++) {
+	for (i = 0; i < strlen(a); i++) {
 		if (strcmp(codificado[i], "") != 0) {
 			strcat(b, codificado[i]);
 			qtd_char++;

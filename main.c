@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	unsigned tabela[256] = {0};
 	LISTA lista_inicial;
 	char palavra[30], codificado[1024];
+	float taxaC;
 	
 	// inicializar as estruturas
 	if (!criar_arvore(&codigo)) {
@@ -35,11 +36,7 @@ int main(int argc, char *argv[])
 	// Ler o arquivo linha, por linha
 	//   Para cada caracter da linha, incrementar a frequencia dele na tabela
 	char *arquivo = readFile("dicionario.txt");
-	/*char arquivo[256];
 	
-	printf("Escreva uma string: ");
-	scanf("%s", arquivo);
-	*/
 	int i;
 	for (i = 0; i < strlen(arquivo); i++) {
 		tabela[arquivo[i]]++;
@@ -47,6 +44,15 @@ int main(int argc, char *argv[])
 	
 	if(!constroi_lista (tabela, &lista_inicial)) return 0;
 	if(!constroi_arvore(lista_inicial, &codigo)) return 0;
+	
+	char temp_cod[2048];
+	if (codifica(codigo, arquivo, temp_cod)) {
+		taxaC = (float)((float)(strlen(temp_cod)) / (float)(strlen(arquivo) * (float)(8)));
+		//taxaC = (float)((float)1110/(float)1704);
+		printf("A taxa de compressao eh de %5.2f%%\n", (1-taxaC)*100);
+	} else {
+		printf("Erro ao codificar\n");
+	}
 	
 	// ler a palavra para palavra[30]
 	printf("Escreva uma palavra: ");
