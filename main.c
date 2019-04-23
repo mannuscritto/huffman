@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
 	if (!imprime_codigos(codigo)) return 0;
 		
 	// ler um padrao de bits para codificado
-	char padrao[128];
 	printf("Digite um padrao de bits codificado: ");
-	scanf("%s", padrao);
+	scanf("%s", codificado);
 	strcpy(palavra, "");
-	if (decodifica(codigo, padrao, palavra))
-		printf("%s -> %s\n", padrao, palavra);
+	
+	if (decodifica(codigo, codificado, palavra))
+		printf("%s -> %s\n", codificado, palavra);
 	else
 		printf("Esse padrao nao pode ser decodificado com essa arvore\n");
 	system("PAUSE");	
