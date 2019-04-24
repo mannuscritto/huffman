@@ -85,7 +85,7 @@ char *readFile(char *fileName) {
     int c;
 
     if (file == NULL)
-        return NULL; //could not open file
+        return NULL;
 
     code = malloc(1000);
 
@@ -93,8 +93,6 @@ char *readFile(char *fileName) {
     {
         code[n++] = (char) c;
     }
-
-    // don't forget to terminate with the null character
     code[n] = '\0';        
 
     return code;

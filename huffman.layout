@@ -1,7 +1,7 @@
 [Editor_5]
-CursorCol=26
-CursorRow=58
-TopLine=109
+CursorCol=3
+CursorRow=77
+TopLine=62
 LeftChar=1
 Open=1
 Top=1
@@ -44,9 +44,9 @@ Top=0
 Order=0,5
 Focused=0
 [Editor_0]
-CursorCol=33
-CursorRow=54
-TopLine=46
+CursorCol=1
+CursorRow=33
+TopLine=26
 LeftChar=1
 Open=1
 Top=0
